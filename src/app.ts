@@ -203,7 +203,7 @@ export async function createAsset(
  */
 export async function transferAssetAsync(
   contract: Contract,
-  data: { id: number; owner: string }
+  data: { id: string; owner: string }
 ): Promise<void> {
   console.log(
     "\n--> Async Submit Transaction: TransferAsset, updates existing asset owner"
