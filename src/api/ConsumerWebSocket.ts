@@ -1,4 +1,6 @@
-const ConsumeMessages = () => {
+import axios from "axios";
+
+export const ConsumeMessages = () => {
   const ws = new WebSocket("ws://127.0.0.1:3000");
 
   ws.onopen = function () {
@@ -14,4 +16,10 @@ const ConsumeMessages = () => {
   return ws;
 };
 
-export default ConsumeMessages;
+export const TransferAsset = async () => {
+  const res = await axios.put("http://127.0.0.1:3000/asset", {
+    id: "1",
+    owner: "Org2",
+  });
+  return res;
+};

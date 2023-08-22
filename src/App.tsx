@@ -10,19 +10,19 @@ import { Layout, Menu, Button, theme } from "antd";
 import Producer from "./pages/Producer";
 import Consumer from "./pages/Consumer";
 import Transaction from "./pages/Transaction";
-import { main } from "./app";
+// import { main } from "./app";
 
 const { Header, Sider, Content } = Layout;
 
 const App: React.FC = () => {
-  const [mainFunctions, setMainFunctions] = useState({});
+  // const [mainFunctions, setMainFunctions] = useState({});
 
   useEffect(() => {
-    async function callMain() {
-      const res = await main();
-      setMainFunctions(res);
-    }
-    callMain();
+    // async function callMain() {
+    //   const res = await main();
+    //   setMainFunctions(res);
+    // }
+    // callMain();
   }, []);
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState("1");
@@ -32,11 +32,11 @@ const App: React.FC = () => {
   const getPage = () => {
     switch (selectedKey) {
       case "1":
-        return <Producer mainFunctions={mainFunctions} />;
+        return <Producer />;
       case "2":
-        return <Consumer mainFunctions={mainFunctions} />;
+        return <Consumer />;
       case "3":
-        return <Transaction mainFunctions={mainFunctions} />;
+        return <Transaction />;
     }
   };
   return (

@@ -3,11 +3,10 @@
 
 import React, { useEffect, useRef } from "react";
 import { Button, List } from "antd";
+import { TransferAsset } from "../api/ConsumerWebSocket";
 // import ConsumeMessages from "../api/ConsumerWebSocket";
-import { MainAppProps } from "../type/MainAppProps";
-import { transferAssetAsync } from "../app";
 
-const Consumer: React.FC<MainAppProps> = ({ mainFunctions }) => {
+const Consumer: React.FC = () => {
   const ws = useRef<WebSocket>();
   // const [messages, setMessages] = useState<string[]>([]);
 
@@ -23,10 +22,12 @@ const Consumer: React.FC<MainAppProps> = ({ mainFunctions }) => {
     // }
   }, []);
   const createConnection = async () => {
-    await transferAssetAsync(mainFunctions.contract, {
-      id: "1",
-      owner: "Org2",
-    });
+    const res = await TransferAsset();
+    console.log(res);
+    // await transferAssetAsync(mainFunctions.contract, {
+    //   id: "1",
+    //   owner: "Org2",
+    // });
     // console.log("sendt message", ws);
     // if (ws.current) {
     //   ws.current.send("get");

@@ -1,26 +1,22 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import React from "react";
 
 import { Button, Form, Input } from "antd";
+import { CreateAsset } from "../api/CreateMessageAPI";
 // import CreateMessage from "../api/CreateMessageAPI";
-import { MainAppProps } from "../type/MainAppProps";
-import { createAsset } from "../app";
 export type FieldType = {
   id?: string;
   value?: string;
 };
 
-const Producer: React.FC<MainAppProps> = ({ mainFunctions }) => {
+const Producer: React.FC = () => {
   const onFinish = async (values: FieldType) => {
-    console.log("Success:", values, mainFunctions);
+    console.log("Success:", values);
 
-    createAsset(mainFunctions?.contract, values);
+    // createAsset(mainFunctions?.contract, values);
 
-    // const res = await CreateMessage(values);
+    const res = await CreateAsset(values);
 
-    // console.log(res);
+    console.log(res);
   };
 
   return (

@@ -1,8 +1,6 @@
 import React from "react";
-import { MainAppProps } from "../type/MainAppProps";
 
-const Transaction: React.FC<MainAppProps> = ({ mainFunctions }) => {
-  console.log(mainFunctions);
+const Transaction: React.FC = () => {
   return (
     <div>
       <h1>Transaction</h1>
