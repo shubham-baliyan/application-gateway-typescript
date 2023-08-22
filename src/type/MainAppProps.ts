@@ -1,5 +1,5 @@
 export interface MainAppProps {
   mainFunctions:
-    | { client: unknown; contract: unknown; gateway: unknown }
-    | object;
+    | object
+    | { client: unknown; contract: unknown; gateway: unknown };
 }

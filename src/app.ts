@@ -179,18 +179,19 @@ export async function getAllAssets(contract: Contract): Promise<void> {
 /**
  * Submit a transaction synchronously, blocking until it has been committed to the ledger.
  */
-export async function createAsset(contract: Contract): Promise<void> {
+export async function createAsset(
+  contract: Contract,
+  values: { id: string; value: string }
+): Promise<void> {
   console.log(
     "\n--> Submit Transaction: CreateAsset, creates new asset with ID, Color, Size, Owner and AppraisedValue arguments"
   );
 
   await contract.submitTransaction(
     "CreateAsset",
-    assetId,
-    "yellow",
-    "5",
-    "Tom",
-    "1300"
+    values.id,
+    values.value,
+    "Org1"
   );
 
   console.log("*** Transaction committed successfully");
@@ -200,13 +201,16 @@ export async function createAsset(contract: Contract): Promise<void> {
  * Submit transaction asynchronously, allowing the application to process the smart contract response (e.g. update a UI)
  * while waiting for the commit notification.
  */
-export async function transferAssetAsync(contract: Contract): Promise<void> {
+export async function transferAssetAsync(
+  contract: Contract,
+  data: { id: number; owner: string }
+): Promise<void> {
   console.log(
     "\n--> Async Submit Transaction: TransferAsset, updates existing asset owner"
   );
 
   const commit = await contract.submitAsync("TransferAsset", {
-    arguments: [assetId, "Saptha"],
+    arguments: [data.id, data.owner],
   });
   const oldOwner = utf8Decoder.decode(commit.getResult());
 

@@ -1,8 +1,12 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import React from "react";
+
 import { Button, Form, Input } from "antd";
-import CreateMessage from "../api/CreateMessageAPI";
+// import CreateMessage from "../api/CreateMessageAPI";
 import { MainAppProps } from "../type/MainAppProps";
-// import { createAsset } from "../app";
+import { createAsset } from "../app";
 export type FieldType = {
   id?: string;
   value?: string;
@@ -11,10 +15,12 @@ export type FieldType = {
 const Producer: React.FC<MainAppProps> = ({ mainFunctions }) => {
   const onFinish = async (values: FieldType) => {
     console.log("Success:", values, mainFunctions);
-    // createAsset();
-    const res = await CreateMessage(values);
 
-    console.log(res);
+    createAsset(mainFunctions?.contract, values);
+
+    // const res = await CreateMessage(values);
+
+    // console.log(res);
   };
 
   return (
