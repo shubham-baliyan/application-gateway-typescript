@@ -1,6 +1,3 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-
 import React, { useEffect, useRef, useState } from "react";
 import { Button, List } from "antd";
 // import { TransferAsset } from "../api/ConsumerWebSocket";
@@ -9,7 +6,10 @@ import { ConsumeMessages, TransferAsset } from "../api/ConsumerWebSocket";
 const Consumer: React.FC = () => {
   const ws = useRef<WebSocket>();
   const [messages, setMessages] = useState<string[]>([]);
-
+  async function call(data: { id: string; owner: string }) {
+    const res = await TransferAsset(data);
+    console.log("res", res);
+  }
   useEffect(() => {
     //    console.log("HI", ws, mainFunctions);
     if (!ws.current) {
@@ -18,8 +18,7 @@ const Consumer: React.FC = () => {
         console.log("message", message.data);
         const data = JSON.parse(message.data);
         setMessages((messages) => [...messages, message.data]);
-        const res = await TransferAsset({ id: data.id, owner: "Org2" });
-        console.log("res", res);
+        call({ id: data.id, owner: "Org2" });
       };
       console.log("ws.", ws);
     }
