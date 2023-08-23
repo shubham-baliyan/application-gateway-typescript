@@ -11,7 +11,7 @@ const Consumer: React.FC = () => {
   // const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
-    console.log("HI", ws, mainFunctions);
+//    console.log("HI", ws, mainFunctions);
     // if (!ws.current) {
     //   ws.current = ConsumeMessages();
     //   ws.current.onmessage = (message: MessageEvent) => {
@@ -40,14 +40,6 @@ const Consumer: React.FC = () => {
       <Button type="primary" onClick={createConnection}>
         Consume Messages
       </Button>
-      <List
-        size="small"
-        header={<div>Messages</div>}
-        footer={<div>Footer</div>}
-        bordered
-        dataSource={messages}
-        renderItem={(item) => <List.Item>{item}</List.Item>}
-      />
     </div>
   );
 };

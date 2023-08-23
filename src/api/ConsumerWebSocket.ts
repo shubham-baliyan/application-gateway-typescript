@@ -17,7 +17,7 @@ export const ConsumeMessages = () => {
 };
 
 export const TransferAsset = async () => {
-  const res = await axios.put("http://127.0.0.1:3000/asset", {
+  const res = await axios.put("https://api.shubhamb.dev/asset", {
     id: "1",
     owner: "Org2",
   });

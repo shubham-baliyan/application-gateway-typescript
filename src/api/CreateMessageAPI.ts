@@ -6,6 +6,6 @@ export const CreateMessage = async (data: FieldType) => {
 };
 
 export const CreateAsset = async (data: FieldType) => {
-  const res = await axios.post("http://127.0.0.1:3000/asset", data);
+  const res = await axios.post("https://api.shubhamb.dev/asset", data);
   return res;
 };
