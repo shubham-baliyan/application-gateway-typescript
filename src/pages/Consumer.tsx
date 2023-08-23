@@ -1,38 +1,42 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, List } from "antd";
-import { TransferAsset } from "../api/ConsumerWebSocket";
-// import ConsumeMessages from "../api/ConsumerWebSocket";
+// import { TransferAsset } from "../api/ConsumerWebSocket";
+import { ConsumeMessages, TransferAsset } from "../api/ConsumerWebSocket";
 
 const Consumer: React.FC = () => {
   const ws = useRef<WebSocket>();
-  // const [messages, setMessages] = useState<string[]>([]);
+  const [messages, setMessages] = useState<string[]>([]);
 
   useEffect(() => {
-//    console.log("HI", ws, mainFunctions);
-    // if (!ws.current) {
-    //   ws.current = ConsumeMessages();
-    //   ws.current.onmessage = (message: MessageEvent) => {
-    //     console.log("message", message.data);
-    //     setMessages([...messages, message.data]);
-    //   };
-    //   console.log("ws.", ws);
-    // }
+    //    console.log("HI", ws, mainFunctions);
+    if (!ws.current) {
+      ws.current = ConsumeMessages();
+      ws.current.onmessage = (message: MessageEvent) => {
+        console.log("message", message.data);
+        const data = JSON.parse(message.data);
+        setMessages((messages) => [...messages, message.data]);
+        const res = await TransferAsset({ id: data.id, owner: "Org2" });
+        console.log("res", res);
+      };
+      console.log("ws.", ws);
+    }
   }, []);
+  console.log("messages", messages);
   const createConnection = async () => {
-    const res = await TransferAsset();
-    console.log(res);
+    // const res = await TransferAsset();
+    // console.log(res);
     // await transferAssetAsync(mainFunctions.contract, {
     //   id: "1",
     //   owner: "Org2",
     // });
-    // console.log("sendt message", ws);
-    // if (ws.current) {
-    //   ws.current.send("get");
-    //   console.log("mesgage");
-    // }
+    console.log("sendt message", ws);
+    if (ws.current) {
+      ws.current.send("get");
+      console.log("mesgage");
+    }
   };
   return (
     <div>
@@ -40,6 +44,14 @@ const Consumer: React.FC = () => {
       <Button type="primary" onClick={createConnection}>
         Consume Messages
       </Button>
+      <List
+        size="small"
+        header={<div>Header</div>}
+        footer={<div>Footer</div>}
+        bordered
+        dataSource={messages}
+        renderItem={(item) => <List.Item>{item}</List.Item>}
+      />
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const ConsumeMessages = () => {
-  const ws = new WebSocket("ws://127.0.0.1:3000");
+  const ws = new WebSocket("wss://consumer.shubhamb.dev/");
 
   ws.onopen = function () {
     console.log("WebSocket connection established");
@@ -16,10 +16,7 @@ export const ConsumeMessages = () => {
   return ws;
 };
 
-export const TransferAsset = async () => {
-  const res = await axios.put("https://api.shubhamb.dev/asset", {
-    id: "1",
-    owner: "Org2",
-  });
+export const TransferAsset = async (data: { id: string; owner: string }) => {
+  const res = await axios.put("https://fabric.shubhamb.dev/asset", data);
   return res;
 };

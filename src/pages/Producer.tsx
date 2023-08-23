@@ -2,7 +2,7 @@ import React from "react";
 
 import { Button, Form, Input } from "antd";
 import { CreateAsset } from "../api/CreateMessageAPI";
-// import CreateMessage from "../api/CreateMessageAPI";
+import { CreateMessage } from "../api/CreateMessageAPI";
 export type FieldType = {
   id?: string;
   value?: string;
@@ -12,11 +12,11 @@ const Producer: React.FC = () => {
   const onFinish = async (values: FieldType) => {
     console.log("Success:", values);
 
-    // createAsset(mainFunctions?.contract, values);
-
     const res = await CreateAsset(values);
 
-    console.log(res);
+    const anotherRes = await CreateMessage(values);
+    // console.log(res, anotherRes);
+    console.log("another", anotherRes, res);
   };
 
   return (

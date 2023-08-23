@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,20 +10,10 @@ import { Layout, Menu, Button, theme } from "antd";
 import Producer from "./pages/Producer";
 import Consumer from "./pages/Consumer";
 import Transaction from "./pages/Transaction";
-// import { main } from "./app";
 
 const { Header, Sider, Content } = Layout;
 
 const App: React.FC = () => {
-  // const [mainFunctions, setMainFunctions] = useState({});
-
-  useEffect(() => {
-    // async function callMain() {
-    //   const res = await main();
-    //   setMainFunctions(res);
-    // }
-    // callMain();
-  }, []);
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState("1");
   const {
