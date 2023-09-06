@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, message } from "antd";
 import { CreateAsset } from "../api/CreateMessageAPI";
 import { CreateMessage } from "../api/CreateMessageAPI";
 export type FieldType = {
@@ -9,19 +9,23 @@ export type FieldType = {
 };
 
 const Producer: React.FC = () => {
+  const [form] = Form.useForm();
+  const [messageApi] = message.useMessage();
   const onFinish = async (values: FieldType) => {
     console.log("Success:", values);
-
+    form.resetFields();
     const res = await CreateAsset(values);
 
     const anotherRes = await CreateMessage(values);
     // console.log(res, anotherRes);
     console.log("another", anotherRes, res);
+    messageApi.success("Message Produced Successfully");
   };
 
   return (
     <div>
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
